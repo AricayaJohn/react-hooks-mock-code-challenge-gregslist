@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Search() {
+function Search({onSearch }) {
+  const [searchTerm, setSearchTerm] = useState("")
+
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("submitted");
+    onSearch(searchTerm)
+  }
+  const handleChange = (e) => {
+    setSearchTerm(e.target.value);
+    onSearch(e.target.value)
   }
 
   return (
@@ -12,8 +18,8 @@ function Search() {
         type="text"
         id="search"
         placeholder="search free stuff"
-        value={""}
-        onChange={(e) => console.log(e.target.value)}
+        value={searchTerm}
+        onChange={handleChange}
       />
       <button type="submit">🔍</button>
     </form>
